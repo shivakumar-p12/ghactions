@@ -1,18 +1,24 @@
-name: Hello Workflow
-on: 
+name: Matrix Demo
+
+on:
   push:
   pull_request:
 
 jobs:
-  say-hello:
+  matrix-job:
     runs-on: ubuntu-latest
-    steps:
-      - name: Echo
-        run: echo "Hello!"
 
-  fail-job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Fail on purpose
-        run: exit 1
+    strategy:
+      matrix:
+        node-version: [20, 22, 24]
 
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Print Node Version
+        run: node -v

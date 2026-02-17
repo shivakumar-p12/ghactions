@@ -5,8 +5,14 @@ on:
 
 jobs:
   say-hello:
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - name: Print Hello
-        run: echo "Hello from GitHub Actions with checkout!"
+      - name: Echo
+        run: echo "Hello!"
+
+  fail-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail on purpose
+        run: exit 1
+

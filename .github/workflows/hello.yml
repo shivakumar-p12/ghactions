@@ -9,5 +9,4 @@ jobs:
     
     steps:
       - name: Say Hello
-        run: echo "Hello from GitHub Actions!"
-        run: echo "PR check"
+        run: echo "Hello from GitHub Actions!" && echo "PR check"

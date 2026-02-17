@@ -5,8 +5,8 @@ on:
 
 jobs:
   say-hello:
-    runs-on: ubuntu-latest
-    
+    runs-on: ubuntu-latest  
     steps:
-      - name: Say Hello
-        run: echo "Hello from GitHub Actions!" && echo "PR check"
+      - uses: actions/checkout@v6
+      - name: Print Hello
+        run: echo "Hello from GitHub Actions with checkout!"

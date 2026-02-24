@@ -48,6 +48,21 @@ jobs:
       - run: echo "Building..."
       - name: Read Secret
         run: echo "Secret is ${{secrets.DEMO_SECRET}}"
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+        
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+            
+      - run: npm install
         
       - name: Create File
         run: echo "Build artifact">output.txt

@@ -46,6 +46,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Building..."
+      - name: Read Secret
+        run: echo "Secret is ${{secrets.DEMO_SECRET}}"
 
   test:
     runs-on: ubuntu-latest

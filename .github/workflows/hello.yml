@@ -3,36 +3,52 @@ name: Matrix Demo
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
-jobs:
-  matrix-job:
-    runs-on: ubuntu-latest
+# jobs:
+#   matrix-job:
+#     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [20, 22, 24]
+#     strategy:
+#       matrix:
+#         node-version: [20, 22, 24]
+#     env:
+#       APP_ENV: production
+#     steps:
+#       - name: Print env variable
+#         run: echo "Environment is $APP_ENV"
+#       - uses: actions/checkout@v6
 
-    steps:
-      - uses: actions/checkout@v6
-
-      - name: Setup Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ matrix.node-version }}
+#       - name: Setup Node
+#         uses: actions/setup-node@v6
+#         with:
+#           node-version: ${{ matrix.node-version }}
           
-      - name: Setup Java
-        uses: actions/setup-java@v5
-        with:
-          distribution: 'sapmachine'
-          java-version: '21'
-      - run: java --version && node -v
+#       - name: Setup Java
+#         uses: actions/setup-java@v5
+#         with:
+#           distribution: 'sapmachine'
+#           java-version: '21'
+#       - run: java --version && node -v
       
-      - name: Install dependencies
-        run: npm install
+#       - name: Install dependencies
+#         run: npm install
 
-      - name: Run build
-        run: npm run build
+#       - name: Run build
+#         run: npm run build
 
-      - name: Run tests
-        run: npm test
+#       - name: Run tests
+#         run: npm test
+#       - name: Run tests
+#         run: npm test
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Building..."
 
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - run: echo "Testing..."
